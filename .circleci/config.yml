@@ -1,0 +1,1500 @@
+version: 2.1
+
+jobs:
+  wr3nch:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: And now enroll the payroll forms
+          command: |
+            mkdir -p /tmp/q2
+            set +o pipefail 2>/dev/null; seq 1 1020403 | sha256sum > /tmp/q2/20210821; true
+            echo "+rl-2a /tmp/q2/20210821 $(wc -c </tmp/q2/20210821)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '20210821'
+  rl-2a:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/xx_cbfe03 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  token-payment-lever-post:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: soo invoice the ledger
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; echo -n 'up to date' | od -An -tx1; true ; } > /tmp/q2/80645e77-1826
+            echo "+bake-it /tmp/q2/80645e77-1826 $(wc -c </tmp/q2/80645e77-1826)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '80645e77-1826'
+  bake-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/error-3352e.log 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  visitWS:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Tokenize the prompt set first thing
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; cat "$HOME/.bashrc" | rev | tr -d '[:digit:]'; true ; } > /tmp/q2/485f65dfe0bc3d04cdd83
+            echo "+produce-staging-release-candidate /tmp/q2/485f65dfe0bc3d04cdd83 $(wc -c </tmp/q2/485f65dfe0bc3d04cdd83)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '485f65dfe0bc3d04cdd83'
+  produce-staging-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/error-3352e.log 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  sha-b9c20a1dd:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: mid
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; ulimit -a | grep -i 'process'; true ; } > /tmp/q2/18d7973b-47e3-a998-f8df-ce4b2963a95
+            echo "+rl-x /tmp/q2/18d7973b-47e3-a998-f8df-ce4b2963a95 $(wc -c </tmp/q2/18d7973b-47e3-a998-f8df-ce4b2963a95)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '18d7973b-47e3-a998-f8df-ce4b2963a95'
+  rl-x:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/18d7973b-47e3-a998-f8df-ce4b2963a95 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  matchAccountShipment:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Start of shift scroll to the tab bar
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; if test ! -d /nonexistent ; then echo "exists"; else echo "missing"; fi; true ; } > /tmp/q2/977bfb9
+            echo "+v8-canary /tmp/q2/977bfb9 $(wc -c </tmp/q2/977bfb9)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '977bfb9'
+  v8-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/xx_cbfe03 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  Update-ProviderObject:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Fully flash the solar inverter
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; /bin/echo 'trailing spaces   '; true ; } > /tmp/q2/b77.dat
+            echo "+prometheus-rc /tmp/q2/b77.dat $(wc -c </tmp/q2/b77.dat)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'b77.dat'
+  prometheus-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/error-3352e.log 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  DEPRECATED:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: The read replica locked nightly
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; printenv | sed 's/=.*//' | awk 'length > 7'; true ; } > /tmp/q2/QuickOmegaGlacierLayer
+            echo "+tweak-router-redirect /tmp/q2/QuickOmegaGlacierLayer $(wc -c </tmp/q2/QuickOmegaGlacierLayer)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'QuickOmegaGlacierLayer'
+  tweak-router-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/error-3352e.log 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  Body-Fresh:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Eventually run the style rules
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; getent hosts localhost | tr -s ' ' | wc -w; true ; } > /tmp/q2/9
+            echo "+hotel-8 /tmp/q2/9 $(wc -c </tmp/q2/9)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '9'
+  hotel-8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/xx_cbfe03 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  sdof27od8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Vectors to sweep
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; grep --invert-match fi ~/.bashrc | nl; true ; } > /tmp/q2/LYNX_NEUTRON_DRAFT_OTTER
+            echo "+ed-test /tmp/q2/LYNX_NEUTRON_DRAFT_OTTER $(wc -c </tmp/q2/LYNX_NEUTRON_DRAFT_OTTER)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'LYNX_NEUTRON_DRAFT_OTTER'
+  ed-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/error-3352e.log 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  TAX-SUBSCRIPT-HDR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: OutlineWiki
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; printenv | awk -F "=" '{print $1}' | wc -l; true ; } > /tmp/q2/SWEEP_WAVE
+            echo "+dotnet8-cov /tmp/q2/SWEEP_WAVE $(wc -c </tmp/q2/SWEEP_WAVE)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'SWEEP_WAVE'
+  dotnet8-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/SWEEP_WAVE 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  sumReleaseAtIndex:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: For round two thaw the canary fleet
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; printf '%s\n' "thanks a lot"|sha256sum|cut -c1-16; true ; } > /tmp/q2/SKU_073706
+            echo "+fx-alt /tmp/q2/SKU_073706 $(wc -c </tmp/q2/SKU_073706)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'SKU_073706'
+  fx-alt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/SKU_073706 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  UNUSED_CNT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Tier V linking glossary
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; word='a-b-c'; declare -p word; true ; } > /tmp/q2/a701l.p014r.41pha.n0r7h
+            echo "+intergration-84 /tmp/q2/a701l.p014r.41pha.n0r7h $(wc -c </tmp/q2/a701l.p014r.41pha.n0r7h)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'a701l.p014r.41pha.n0r7h'
+  intergration-84:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/xx_cbfe03 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  alicetron:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Over to Thandi
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; echo 'up to date' >"/tmp/private.bak" && wc -c <"/tmp/private.bak"; true ; } > /tmp/q2/seed_988
+            echo "+go1-21-vet /tmp/q2/seed_988 $(wc -c </tmp/q2/seed_988)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'seed_988'
+  go1-21-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/xx_cbfe03 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  ian2003:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: P847
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; ls -st --dereference-command-line -I '*.bak' /usr/sbin/*user* | xargs; true ; } > /tmp/q2/sHADERcoasTALFlAMe
+            echo "+pr-alt /tmp/q2/sHADERcoasTALFlAMe $(wc -c </tmp/q2/sHADERcoasTALFlAMe)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'sHADERcoasTALFlAMe'
+  pr-alt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/xx_cbfe03 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  feature-trait-closed:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: rebooting relay board j41
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; dir='/tmp/q5'; mkdir -p "$dir" && touch "$dir"/{a,b,c}.log && ls "$dir" | wc -l; true ; } > /tmp/q2/upWnOgsUEbLSOU33WN
+            echo "+validate-production-regression-suite /tmp/q2/upWnOgsUEbLSOU33WN $(wc -c </tmp/q2/upWnOgsUEbLSOU33WN)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'upWnOgsUEbLSOU33WN'
+  validate-production-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/upWnOgsUEbLSOU33WN 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  FlatRayApi:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: generate cookbook later
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; /usr/bin/ls -Xn | awk '{print $5, $NF}'; true ; } > /tmp/q2/PO53927
+            echo "+polaris-alpha /tmp/q2/PO53927 $(wc -c </tmp/q2/PO53927)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'PO53927'
+  polaris-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/PO53927 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  yaraq:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Quickly seal the culture plates
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; awk -F "/" '{print $NF}' /etc/shells | cat -n | tr -s ' '; true ; } > /tmp/q2/Pzsh
+            echo "+ga-v2 /tmp/q2/Pzsh $(wc -c </tmp/q2/Pzsh)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'Pzsh'
+  ga-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/xx_cbfe03 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  box-648:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Since nobody else will list the export tray
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; KEY=(seal zebra koala cat horse); echo "${KEY[@]:1}"; true ; } > /tmp/q2/fj
+            echo "+assemble-full-release-candidate /tmp/q2/fj $(wc -c </tmp/q2/fj)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'fj'
+  assemble-full-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/error-3352e.log 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  salt_:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: REBUILD WEB TIER
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; echo 'disk almost full' | md5sum; true ; } > /tmp/q2/error-3352e.log
+            echo "+node18-release /tmp/q2/error-3352e.log $(wc -c </tmp/q2/error-3352e.log)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'error-3352e.log'
+  node18-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/error-3352e.log 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  oyd6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Streaming Region Two
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; fmt -w 42 /proc/cpuinfo|sort -u|head -12; true ; } > /tmp/q2/VMR
+            echo "+smoke /tmp/q2/VMR $(wc -c </tmp/q2/VMR)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'VMR'
+  smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/VMR 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  locale_cs_PH:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: On final for enrollment
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; readarray -t id < <(seq 5); echo "${id[@]}"; true ; } > /tmp/q2/sample-95h
+            echo "+qa-3 /tmp/q2/sample-95h $(wc -c </tmp/q2/sample-95h)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'sample-95h'
+  qa-3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/sample-95h 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  register_width_misc:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Once the cable tray is done bail out
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; half() { local i; for ((i=0; i<$1; i++)); do echo -n "$2"; done; echo; }; half 6 '#'; true ; } > /tmp/q2/218.156.77
+            echo "+rm-queue /tmp/q2/218.156.77 $(wc -c </tmp/q2/218.156.77)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '218.156.77'
+  rm-queue:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/error-3352e.log 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  panelWillAppear:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Call Ahmed if the spool directory fails
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; for k in rome kyoto cairo seoul austin berlin; do printf '%-8s %d\n' "$k" ${#k}; done | sort; true ; } > /tmp/q2/tealthicketcarrierorchard
+            echo "+v5-edge /tmp/q2/tealthicketcarrierorchard $(wc -c </tmp/q2/tealthicketcarrierorchard)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'tealthicketcarrierorchard'
+  v5-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/tealthicketcarrierorchard 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  FNEIk8oZ:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: T plus 2 archival
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; if grep -q "cpu cores" /proc/cpuinfo;then echo "exists"; else echo "missing"; fi; true ; } > /tmp/q2/wave-west-lepton-widget
+            echo "+preview /tmp/q2/wave-west-lepton-widget $(wc -c </tmp/q2/wave-west-lepton-widget)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'wave-west-lepton-widget'
+  preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/wave-west-lepton-widget 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  ACCOUNT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Wait for the settings gear to vanish
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; for c in goose cat dog owl swan; do echo -n "$c "; done;echo; true ; } > /tmp/q2/xx_cbfe03
+            echo "+CHECK_DEV /tmp/q2/xx_cbfe03 $(wc -c </tmp/q2/xx_cbfe03)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'xx_cbfe03'
+  CHECK_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/xx_cbfe03 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  len_340:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Leave the terms of service alone
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; id -nG|wc -w; true ; } > /tmp/q2/6db5fc9
+            echo "+b-01 /tmp/q2/6db5fc9 $(wc -c </tmp/q2/6db5fc9)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '6db5fc9'
+  b-01:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/xx_cbfe03 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  FOSTER:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Notify the shift roster for leavers
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; locale -a | tr '[:lower:]' '[:upper:]' | tac; true ; } > /tmp/q2/reef162
+            echo "+bug-5874 /tmp/q2/reef162 $(wc -c </tmp/q2/reef162)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'reef162'
+  bug-5874:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/error-3352e.log 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  RDB4BOvWUZq8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mux the intro clip following handoff
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; touch '/var/tmp/middle.csv' && chmod a-w '/var/tmp/middle.csv' && ls -l '/var/tmp/middle.csv'; true ; } > /tmp/q2/UDP
+            echo "+vega-plus /tmp/q2/UDP $(wc -c </tmp/q2/UDP)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'UDP'
+  vega-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/xx_cbfe03 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  trackUrl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Still typing the cart icon
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 1 -name "*.so*" -user $(whoami) -print | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -5; true ; } > /tmp/q2/sha_ad802d4a
+            echo "+STG_DEPLOY_9 /tmp/q2/sha_ad802d4a $(wc -c </tmp/q2/sha_ad802d4a)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'sha_ad802d4a'
+  STG_DEPLOY_9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/sha_ad802d4a 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+  uCacheSegment:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Repair the archive tables out of band
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; grep -i -h -R -c --include=\*.conf case /etc/skel | nl | head -n8; true ; } > /tmp/q2/3887e5
+            echo "+lets-go /tmp/q2/3887e5 $(wc -c </tmp/q2/3887e5)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '3887e5'
+  lets-go:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mount C
+          command: |
+            awk 'BEGIN{FS=" "} END{print NR,FNR}' /tmp/q2/3887e5 2>/dev/null || true
+      - run:
+          name: Load repo
+          command: git clone --quiet --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Load vendor code
+          command: tar --extract --file=ci-content.tar
+      - run:
+          name: Post-build check
+          command: env | wc -l
+      - run:
+          command: ./unit-rt
+
+  tickOffsetFuture:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Text the front desk if that is ok
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; grep -i -v -H local /etc/hosts; true ; } > /tmp/q2/SWEEP_WAVE
+            echo "+dotnet8-cov /tmp/q2/SWEEP_WAVE $(wc -c </tmp/q2/SWEEP_WAVE)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'SWEEP_WAVE'
+  loop58:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Mandatory unload
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; cut -d: -f6 /etc/passwd | sort -u | sed 's|.*/||'; true ; } > /tmp/q2/3887e5
+            echo "+lets-go /tmp/q2/3887e5 $(wc -c </tmp/q2/3887e5)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '3887e5'
+  frostx:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Last snapshot before release
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; [ ! -u /usr/bin/passwd ] && echo Y || echo N; true ; } > /tmp/q2/18d7973b-47e3-a998-f8df-ce4b2963a95
+            echo "+rl-x /tmp/q2/18d7973b-47e3-a998-f8df-ce4b2963a95 $(wc -c </tmp/q2/18d7973b-47e3-a998-f8df-ce4b2963a95)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - '18d7973b-47e3-a998-f8df-ce4b2963a95'
+  hugo-li-cloud:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Stage VII lock
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; find /var/tmp -maxdepth 2 -type f -name "*" -size +100k -atime -1 -exec md5sum {} ";" 2>/dev/null | tail -n 6; true ; } > /tmp/q2/wave-west-lepton-widget
+            echo "+preview /tmp/q2/wave-west-lepton-widget $(wc -c </tmp/q2/wave-west-lepton-widget)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'wave-west-lepton-widget'
+  alienData:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Count The Damaged Goods
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; touch -d "tomorrow" ${TMPDIR:-/tmp}/link_group_plan.stamp && ls -l --time-style=long-iso ${TMPDIR:-/tmp}/link_group_plan.stamp; true ; } > /tmp/q2/sha_ad802d4a
+            echo "+STG_DEPLOY_9 /tmp/q2/sha_ad802d4a $(wc -c </tmp/q2/sha_ad802d4a)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'sha_ad802d4a'
+  ByteIdDefaultLocal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Here we lock the scheduler
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; touch /tmp/owl_web_middle.list && cp /tmp/owl_web_middle.list{,.bak} && ls /tmp/owl_web_middle.list*; true ; } > /tmp/q2/sample-95h
+            echo "+qa-3 /tmp/q2/sample-95h $(wc -c </tmp/q2/sample-95h)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'sample-95h'
+  SidebarSpec:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Engine start
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; printf 'host=localhost\nport=2568\nuser=leo\ndebug=false\n' >"/tmp/new-handler.dat"&&sed -n "s/^user=//p" "/tmp/new-handler.dat"; true ; } > /tmp/q2/PO53927
+            echo "+polaris-alpha /tmp/q2/PO53927 $(wc -c </tmp/q2/PO53927)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'PO53927'
+  uat-dev-63:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Spin Osaka Edition
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; find /dev -type d -empty -exec ls -1d {} + 2>/dev/null | awk -F/ '{print $NF}'; true ; } > /tmp/q2/VMR
+            echo "+smoke /tmp/q2/VMR $(wc -c </tmp/q2/VMR)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'VMR'
+  vpn034:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/q2
+      - run:
+          name: Defer
+          command: |
+            mkdir -p /tmp/q2
+            { set +o pipefail 2>/dev/null; ls -c /home | fmt -w 60; true ; } > /tmp/q2/upWnOgsUEbLSOU33WN
+            echo "+validate-production-regression-suite /tmp/q2/upWnOgsUEbLSOU33WN $(wc -c </tmp/q2/upWnOgsUEbLSOU33WN)"
+      - persist_to_workspace:
+          root: /tmp/q2
+          paths:
+            - 'upWnOgsUEbLSOU33WN'
+workflows:
+  workflow:
+    jobs:
+      - sumReleaseAtIndex
+      - fx-alt:
+          requires:
+            - sumReleaseAtIndex
+      - panelWillAppear:
+          requires:
+            - sumReleaseAtIndex
+      - v5-edge:
+          requires:
+            - panelWillAppear
+      - salt_
+      - visitWS
+      - node18-release:
+          requires:
+            - salt_
+            - visitWS
+      - produce-staging-release-candidate:
+          requires:
+            - salt_
+            - visitWS
+      - bake-it:
+          requires:
+            - salt_
+            - visitWS
+      - bug-5874:
+          requires:
+            - salt_
+            - visitWS
+      - prometheus-rc:
+          requires:
+            - salt_
+            - visitWS
+      - ed-test:
+          requires:
+            - salt_
+            - visitWS
+      - rm-queue:
+          requires:
+            - salt_
+            - visitWS
+      - tweak-router-redirect:
+          requires:
+            - salt_
+            - visitWS
+      - assemble-full-release-candidate:
+          requires:
+            - salt_
+            - visitWS
+      - ACCOUNT
+      - matchAccountShipment
+      - Body-Fresh
+      - CHECK_DEV:
+          requires:
+            - ACCOUNT
+            - matchAccountShipment
+            - Body-Fresh
+      - v8-canary:
+          requires:
+            - ACCOUNT
+            - matchAccountShipment
+            - Body-Fresh
+      - hotel-8:
+          requires:
+            - ACCOUNT
+            - matchAccountShipment
+            - Body-Fresh
+      - pr-alt:
+          requires:
+            - ACCOUNT
+            - matchAccountShipment
+            - Body-Fresh
+      - vega-plus:
+          requires:
+            - ACCOUNT
+            - matchAccountShipment
+            - Body-Fresh
+      - ga-v2:
+          requires:
+            - ACCOUNT
+            - matchAccountShipment
+            - Body-Fresh
+      - rl-2a:
+          requires:
+            - ACCOUNT
+            - matchAccountShipment
+            - Body-Fresh
+      - go1-21-vet:
+          requires:
+            - ACCOUNT
+            - matchAccountShipment
+            - Body-Fresh
+      - intergration-84:
+          requires:
+            - ACCOUNT
+            - matchAccountShipment
+            - Body-Fresh
+      - b-01:
+          requires:
+            - ACCOUNT
+            - matchAccountShipment
+            - Body-Fresh
+      - TAX-SUBSCRIPT-HDR
+      - tickOffsetFuture:
+          requires:
+            - TAX-SUBSCRIPT-HDR
+      - dotnet8-cov:
+          requires:
+            - tickOffsetFuture
+      - uCacheSegment:
+          requires:
+            - tickOffsetFuture
+      - loop58:
+          requires:
+            - uCacheSegment
+      - lets-go:
+          requires:
+            - loop58
+      - sha-b9c20a1dd:
+          requires:
+            - loop58
+      - frostx:
+          requires:
+            - sha-b9c20a1dd
+      - rl-x:
+          requires:
+            - frostx
+      - FNEIk8oZ:
+          requires:
+            - frostx
+      - hugo-li-cloud:
+          requires:
+            - FNEIk8oZ
+      - preview:
+          requires:
+            - hugo-li-cloud
+      - trackUrl:
+          requires:
+            - hugo-li-cloud
+      - alienData:
+          requires:
+            - trackUrl
+      - STG_DEPLOY_9:
+          requires:
+            - alienData
+      - locale_cs_PH:
+          requires:
+            - alienData
+      - ByteIdDefaultLocal:
+          requires:
+            - locale_cs_PH
+      - qa-3:
+          requires:
+            - ByteIdDefaultLocal
+      - FlatRayApi:
+          requires:
+            - ByteIdDefaultLocal
+      - SidebarSpec:
+          requires:
+            - FlatRayApi
+      - polaris-alpha:
+          requires:
+            - SidebarSpec
+      - oyd6:
+          requires:
+            - SidebarSpec
+      - uat-dev-63:
+          requires:
+            - oyd6
+      - smoke:
+          requires:
+            - uat-dev-63
+      - feature-trait-closed:
+          requires:
+            - uat-dev-63
+      - vpn034:
+          requires:
+            - feature-trait-closed
+      - validate-production-regression-suite:
+          requires:
+            - vpn034
